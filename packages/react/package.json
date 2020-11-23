@@ -1,6 +1,6 @@
 {
   "name": "@platform6/components-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React specific wrapper for @platform6/components",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     ]
   },
   "dependencies": {
-    "@platform6/components": "1.0.0",
+    "@platform6/components": "1.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
