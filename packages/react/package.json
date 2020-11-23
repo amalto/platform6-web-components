@@ -1,10 +1,10 @@
 {
   "name": "@platform6/components-react",
-  "version": "2.0.0",
-  "description": "React specific wrapper for bulmil",
+  "version": "1.0.0",
+  "description": "React specific wrapper for @platform6/components",
   "repository": {
     "type": "git",
-    "url": "https://github.com/amalto/platform6-ui-components"
+    "url": "https://github.com/amalto/platform6-web-components"
   },
   "license": "MIT",
   "sideEffects": false,
@@ -30,7 +30,7 @@
     ]
   },
   "dependencies": {
-    "@platform6/components": "2.0.0",
+    "@platform6/components": "1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
