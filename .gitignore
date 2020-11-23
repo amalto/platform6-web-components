@@ -44,6 +44,7 @@ UserInterfaceState.xcuserstate
 build/
 dist/
 loader/
+doc/
 
 # testing
 coverage/
