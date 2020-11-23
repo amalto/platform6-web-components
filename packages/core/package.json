@@ -19,6 +19,9 @@
     "dist/",
     "loader/"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "stencil build --docs",
     "format": "prettier --write ./",
@@ -34,7 +37,7 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "storybook": "start-storybook -p 6006 -s ./dist --ci",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -o ./doc"
   },
   "dependencies": {
     "@creativebulma/bulma-tooltip": "^1.2.0",
