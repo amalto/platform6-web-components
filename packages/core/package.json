@@ -1,10 +1,10 @@
 {
   "name": "@platform6/components",
-  "version": "2.0.0",
-  "description": "Platform 6 UI components",
+  "version": "1.0.0",
+  "description": "Platform 6 Web Components",
   "repository": {
     "type": "git",
-    "url": "https://github.com/amalto/platform6-ui-components"
+    "url": "https://github.com/amalto/platform6-web-components"
   },
   "license": "MIT",
   "main": "dist/index.cjs.js",
