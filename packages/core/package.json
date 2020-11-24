@@ -17,13 +17,15 @@
   "types": "dist/types/index.d.ts",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "scss/"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "build": "stencil build --docs",
+    "prebuild" : "npm run expose.scss --scripts-prepend-node-path",
     "format": "prettier --write ./",
     "postformat": "npm run lint.fix",
     "generate": "stencil generate",
@@ -37,7 +39,8 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "storybook": "start-storybook -p 6006 -s ./dist --ci",
-    "build-storybook": "build-storybook -o ./doc"
+    "build-storybook": "build-storybook -o ./doc",
+    "expose.scss": "cp -r ./src/global ./scss"
   },
   "dependencies": {
     "@creativebulma/bulma-tooltip": "^1.2.0",
