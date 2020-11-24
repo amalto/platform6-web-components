@@ -1,6 +1,6 @@
 {
   "name": "@platform6/components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Platform 6 Web Components",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build": "stencil build --docs",
-    "prebuild" : "npm run expose.scss --scripts-prepend-node-path",
+    "prebuild": "npm run expose.scss --scripts-prepend-node-path",
     "format": "prettier --write ./",
     "postformat": "npm run lint.fix",
     "generate": "stencil generate",
