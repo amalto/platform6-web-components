@@ -1,4 +1,13 @@
 {
   "packages": ["packages/*"],
-  "version": "independent"
+  "version": "independent",
+  "exact": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": ["ignored-file", "*.md"]
+    },
+    "verion": {
+      "ignoreChanges": ["ignored-file", "*.md"]
+    }
+  }
 }
