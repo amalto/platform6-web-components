@@ -1382,7 +1382,7 @@ declare namespace LocalJSX {
      */
     loading?: boolean;
     /**
-     * Listen to change event to get updated p6-grid data
+     * Fires when the configuration changes
      */
     onP6GridConfigurationChange?: (
       event: CustomEvent<{
@@ -1390,11 +1390,11 @@ declare namespace LocalJSX {
       }>,
     ) => void;
     /**
-     * Listen to change event to get updated p6-grid data
+     * Fires when the row data changes
      */
-    onP6GridRowDataChange?: (event: CustomEvent<{ row: DataItem[] }>) => void;
+    onP6GridRowDataChange?: (event: CustomEvent<{ row: DataItem; previous: DataItem | undefined; cloning: boolean }>) => void;
     /**
-     * Listen to change event to get updated p6-grid data
+     * Fire when a row is selected
      */
     onP6GridSelectedRowsChange?: (event: CustomEvent<{ rowIds: Set<RowId> }>) => void;
   }
