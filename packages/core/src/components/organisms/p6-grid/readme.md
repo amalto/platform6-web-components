@@ -13,11 +13,11 @@
 
 ## Events
 
-| Event                       | Description                                        | Type                                                           |
-| --------------------------- | -------------------------------------------------- | -------------------------------------------------------------- |
-| `p6GridConfigurationChange` | Listen to change event to get updated p6-grid data | `CustomEvent<{ columns: Column<Record<string, unknown>>[]; }>` |
-| `p6GridRowDataChange`       | Listen to change event to get updated p6-grid data | `CustomEvent<{ row: Record<string, unknown>[]; }>`             |
-| `p6GridSelectedRowsChange`  | Listen to change event to get updated p6-grid data | `CustomEvent<{ rowIds: Set<string>; }>`                        |
+| Event                       | Description                             | Type                                                                                                               |
+| --------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `p6GridConfigurationChange` | Fires when the configuration changes    | `CustomEvent<{ columns: Column<Record<string, unknown>>[]; }>`                                                     |
+| `p6GridRowDataChange`       | Fires when the row data changes         | `CustomEvent<{ row: Record<string, unknown>; previous: Record<string, unknown> \| undefined; cloning: boolean; }>` |
+| `p6GridSelectedRowsChange`  | Fire when a row is selected             | `CustomEvent<{ rowIds: Set<string>; }>`                                                                            |
 
 ## Methods
 

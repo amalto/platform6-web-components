@@ -57,19 +57,19 @@ export class P6Grid {
   @Prop() data!: DataItem[];
 
   /**
-   * Listen to change event to get updated p6-grid data
+   * Fires when the configuration changes
    */
   @Event() p6GridConfigurationChange!: EventEmitter<{
     columns: Column<DataItem>[];
   }>;
 
   /**
-   * Listen to change event to get updated p6-grid data
+   * Fires when the row data changes
    */
-  @Event() p6GridRowDataChange!: EventEmitter<{ row: DataItem[] }>;
+  @Event() p6GridRowDataChange!: EventEmitter<{ row: DataItem; previous: DataItem | undefined; cloning: boolean }>;
 
   /**
-   * Listen to change event to get updated p6-grid data
+   * Fire when a row is selected
    */
   @Event() p6GridSelectedRowsChange!: EventEmitter<{ rowIds: Set<RowId> }>;
 
@@ -128,10 +128,17 @@ export class P6Grid {
 
   @Listen('p6GridCellValueChanged')
   onP6GridCellValueChanged(event: CustomEvent<CellValueChangedDetail<DataItem>>): void {
-    this.rows = replaceRow(event.detail.row, this.rows);
+    const current = event.detail.row;
+    const cloning = current.id.endsWith('-clone');
+    const previousId = cloning ? current.id.slice(0, -6) : current.id;
+    const previous = this.rows.find(row => row.id === previousId);
+
+    this.rows = replaceRow(current, this.rows);
 
     this.p6GridRowDataChange.emit({
-      row: this.rows.map(row => row.data),
+      row: event.detail.row.data,
+      previous: previous?.data,
+      cloning,
     });
   }
 
