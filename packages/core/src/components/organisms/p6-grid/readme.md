@@ -16,6 +16,7 @@
 | Event                       | Description                             | Type                                                                                                               |
 | --------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `p6GridConfigurationChange` | Fires when the configuration changes    | `CustomEvent<{ columns: Column<Record<string, unknown>>[]; }>`                                                     |
+| `p6GridEditingRow`          | Fire when editing a row starts or stops | `CustomEvent<{ rowId: string; colId?: string \| undefined; editing: boolean; }>`                                   |
 | `p6GridRowDataChange`       | Fires when the row data changes         | `CustomEvent<{ row: Record<string, unknown>; previous: Record<string, unknown> \| undefined; cloning: boolean; }>` |
 | `p6GridSelectedRowsChange`  | Fire when a row is selected             | `CustomEvent<{ rowIds: Set<string>; }>`                                                                            |
 

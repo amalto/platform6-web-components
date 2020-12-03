@@ -1390,6 +1390,10 @@ declare namespace LocalJSX {
       }>,
     ) => void;
     /**
+     * Fire when editing a row starts or stops
+     */
+    onP6GridEditingRow?: (event: CustomEvent<{ rowId: RowId; colId?: ColumnId; editing: boolean }>) => void;
+    /**
      * Fires when the row data changes
      */
     onP6GridRowDataChange?: (event: CustomEvent<{ row: DataItem; previous: DataItem | undefined; cloning: boolean }>) => void;
