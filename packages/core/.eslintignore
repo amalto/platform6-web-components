@@ -1,5 +1,6 @@
 dist/
 loader/
 doc/
+scss/
 
 src/components.d.ts
