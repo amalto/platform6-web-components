@@ -28,7 +28,8 @@ export function compareRow<T extends DataItem>(column: Column<T> | undefined): (
 }
 
 export function filterBy<T extends DataItem>(searchValue: string, columns: Column<T>[]): (row: Row<T>) => boolean {
-  return row => columns.filter(col => col.filtreable !== false).some(col => col.getValue(row.data, col).includes(searchValue));
+  const lowercaseSearchValue = searchValue.toLocaleLowerCase();
+  return row => columns.filter(col => col.filtreable !== false).some(col => col.getValue(row.data, col).toLocaleLowerCase().includes(lowercaseSearchValue));
 }
 
 export function rangeSelectRow<T extends DataItem>(currentRowIdSelect: RowId, selectedRows: Set<RowId>, displayedRow: Row<T>[]): Set<RowId> {
