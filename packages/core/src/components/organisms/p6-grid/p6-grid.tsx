@@ -11,6 +11,8 @@ import {
   ColumnDefinition,
   ColumnId,
   DataItem,
+  EditingCellDetail,
+  EditingCellStatus,
   FilterRowsDetail,
   MoveColumnDetail,
   ResetDefinitionsDetail,
@@ -67,6 +69,11 @@ export class P6Grid {
    * Fires when the row data changes
    */
   @Event() p6GridRowDataChange!: EventEmitter<{ row: DataItem; previous: DataItem | undefined; cloning: boolean }>;
+
+  /**
+   * Fire when editing a row starts or stops
+   */
+  @Event() p6GridEditingRow!: EventEmitter<{ rowId: RowId; colId?: ColumnId; editing: boolean }>;
 
   /**
    * Fire when a row is selected
@@ -140,6 +147,32 @@ export class P6Grid {
       previous: previous?.data,
       cloning,
     });
+  }
+
+  @Listen('p6GridEditingCell')
+  onP6GridEditingCell(event: CustomEvent<EditingCellDetail<DataItem>>): void {
+    const cellId = createCellId(event.detail.row.id, event.detail.column.id);
+    const rowPartId = `row-${event.detail.row.id}`;
+
+    if (EditingCellStatus.Start === event.detail.status) {
+      this.editingCells.add(cellId);
+    } else {
+      this.editingCells.delete(cellId);
+    }
+
+    const numberOfEditedRowCell = Array.from(this.editingCells).filter(cid => cid.startsWith(rowPartId)).length;
+
+    if (numberOfEditedRowCell === 1) {
+      this.p6GridEditingRow.emit({
+        rowId: event.detail.row.id,
+        colId: event.detail.column.id,
+        editing: true,
+      });
+    }
+
+    if (numberOfEditedRowCell === 0) {
+      this.p6GridEditingRow.emit({ rowId: event.detail.row.id, editing: false });
+    }
   }
 
   @Listen('p6ResetCustomDefinitions')
