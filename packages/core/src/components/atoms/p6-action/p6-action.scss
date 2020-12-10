@@ -1,14 +1,14 @@
-$button-color: $text-strong !default;
-$button-background-color: $scheme-main !default;
-$button-family: false !default;
-$button-border-width: $control-border-width !default;
-$action-padding-vertical: calc(0.1em - #{$button-border-width}) !default;
+$action-color: $text-strong !default;
+$action-background-color: transparent !default;
+$action-family: false !default;
+$action-border-width: $control-border-width !default;
+$action-padding-vertical: calc(0.1em - #{$action-border-width}) !default;
 $action-padding-horizontal: 0.2em !default;
-$button-hover-color: $link-hover !default;
-$button-focus-color: $link-focus !default;
-$button-active-color: $link-active !default;
-$button-disabled-background-color: $scheme-main !default;
-$button-disabled-opacity: 0.5 !default;
+$action-hover-color: $link-hover !default;
+$action-focus-color: $link-focus !default;
+$action-active-color: $link-active !default;
+$action-disabled-background-color: $scheme-main !default;
+$action-disabled-opacity: 0.5 !default;
 
 @import 'src/styles/atoms/control';
 
@@ -22,14 +22,14 @@ $button-disabled-opacity: 0.5 !default;
     @include unselectable;
 
     display: inline-flex;
-    background-color: $button-background-color;
-    border-width: $button-border-width;
-    color: $button-color;
+    background-color: $action-background-color;
+    border-width: $action-border-width;
+    color: $action-color;
     cursor: pointer;
     font-family: $body-family;
 
-    @if $button-family {
-      font-family: $button-family;
+    @if $action-family {
+      font-family: $action-family;
     }
 
     justify-content: center;
@@ -41,7 +41,7 @@ $button-disabled-opacity: 0.5 !default;
 
     ::slotted(.icon:first-child:last-child),
     ::slotted(p6-icon:first-child:last-child) {
-      $margin: calc(#{-1 / 2 * $action-padding-horizontal} - #{$button-border-width});
+      $margin: calc(#{-1 / 2 * $action-padding-horizontal} - #{$action-border-width});
 
       margin-left: $margin;
       margin-right: $margin;
@@ -55,13 +55,13 @@ $button-disabled-opacity: 0.5 !default;
 
     // States
     &:hover {
-      color: $button-hover-color;
+      color: $action-hover-color;
     }
     &:focus {
-      color: $button-focus-color;
+      color: $action-focus-color;
     }
     &:active {
-      color: $button-active-color;
+      color: $action-active-color;
     }
 
     // Colors
@@ -131,9 +131,9 @@ $button-disabled-opacity: 0.5 !default;
     // Modifiers
     &[disabled],
     fieldset[disabled] :host {
-      background-color: $button-disabled-background-color;
+      background-color: $action-disabled-background-color;
       border-color: transparent;
-      opacity: $button-disabled-opacity;
+      opacity: $action-disabled-opacity;
     }
   }
 }
