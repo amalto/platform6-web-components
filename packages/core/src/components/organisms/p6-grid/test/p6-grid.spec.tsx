@@ -1,6 +1,6 @@
 import { h } from '@stencil/core';
 import { newSpecPage } from '@stencil/core/testing';
-import { Alignment } from '../../../../shared/types';
+import { Alignment, SortOrder } from '../../../../shared/types';
 import { ColumnDefinition, DataItem } from '../core/entities';
 import { P6Grid } from '../p6-grid';
 
@@ -92,6 +92,7 @@ describe('p6-grid', () => {
     });
     expect(page.root).toMatchSnapshot();
   });
+
   it('should render a grid with on row', async () => {
     const page = await newSpecPage({
       components: [P6Grid],
@@ -101,6 +102,7 @@ describe('p6-grid', () => {
     });
     expect(page.root).toMatchSnapshot();
   });
+
   it('should display a spinner', async () => {
     const page = await newSpecPage({
       components: [P6Grid],
@@ -110,6 +112,7 @@ describe('p6-grid', () => {
     });
     expect(page.body.childNodes[0]).toMatchSnapshot();
   });
+
   it('should display an empty message', async () => {
     const page = await newSpecPage({
       components: [P6Grid],
@@ -118,5 +121,19 @@ describe('p6-grid', () => {
       },
     });
     expect(page.body.childNodes[0]).toMatchSnapshot();
+  });
+
+  it('should render a sorted grid', async () => {
+    const alteredDefinitions = [...definitions];
+
+    alteredDefinitions[2].sortOrder = SortOrder.asc;
+
+    const page = await newSpecPage({
+      components: [P6Grid],
+      template: () => {
+        return <p6-grid definitions={definitions} data={testItems} />;
+      },
+    });
+    expect(page.root).toMatchSnapshot();
   });
 });
