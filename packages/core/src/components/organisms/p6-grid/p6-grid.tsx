@@ -285,7 +285,11 @@ export class P6Grid {
     this.columns = this.definitions.map(fromDefinition);
     this.rows = this.data.map(fromData);
 
-    [this.sortedBy] = this.columns;
+    this.sortedBy = this.columns.find(col => col.sortable !== false && (col.sortOrder === SortOrder.asc || col.sortOrder === SortOrder.desc));
+
+    if (this.sortedBy !== undefined) {
+      this.columns = this.columns.map(col => (col.id === this.sortedBy?.id ? col : { ...col, sortOrder: SortOrder.none }));
+    }
 
     this.l10n = await getL10n(this.host);
   }

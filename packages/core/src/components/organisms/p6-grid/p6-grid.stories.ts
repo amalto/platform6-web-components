@@ -1,7 +1,7 @@
 import { JSX } from '@stencil/core';
 import { Components } from '../../../components';
 import { ComponentProps, getElement, makeStory, Props } from '../../../shared/storybook';
-import { Alignment } from '../../../shared/types';
+import { Alignment, SortOrder } from '../../../shared/types';
 import { ColumnDefinition, DataItem, Row } from './core/entities';
 
 const component = 'p6-grid';
@@ -27,6 +27,7 @@ const definitions: ColumnDefinition<DataItem>[] = [
     field: 'first',
     editable: true,
     width: 150,
+    sortOrder: SortOrder.none,
   },
   {
     label: 'Second Col',
@@ -34,6 +35,7 @@ const definitions: ColumnDefinition<DataItem>[] = [
     editable: true,
     width: 150,
     align: Alignment.end,
+    sortOrder: SortOrder.desc,
   },
   {
     id: 'third',

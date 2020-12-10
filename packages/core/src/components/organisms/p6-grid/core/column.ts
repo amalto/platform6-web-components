@@ -37,7 +37,7 @@ export function fromDefinition<T extends DataItem>(column: ColumnDefinition<T>):
     hidden: column.hidden || false,
     width: column.width || 100,
     align: column.align || Alignment.center,
-    sortOrder: column.sortOrder || SortOrder.none,
+    sortOrder: column.sortOrder === undefined ? SortOrder.none : column.sortOrder,
     disableHeaderMenu: column.disableHeaderMenu || false,
     getValue: column.getValue || defaultGetValue,
     setValue: column.setValue || defaultSetValue,
