@@ -1,7 +1,9 @@
 $table-row-hover-background-color: $scheme-main-bis !default;
+$table-row-hover-border-color: $primary !default;
 
-$table-row-active-background-color: $primary !default;
-$table-row-active-color: $primary-invert !default;
+$table-row-active-border-color: $primary !default;
+$table-row-active-background-color: $primary-light !default;
+$table-row-active-color: findColorInvert($table-row-active-background-color) !default;
 
 $table-striped-row-even-background-color: $scheme-main-bis !default;
 $table-striped-row-even-hover-background-color: $scheme-main-ter !default;
@@ -14,10 +16,28 @@ $table-striped-row-even-hover-background-color: $scheme-main-ter !default;
   background-color: $table-striped-row-even-background-color;
 }
 
+:host(:hover) {
+  box-shadow: inset 0 0 0 2px $table-row-hover-border-color !important;
+}
+
 :host(.is-selected) {
   background-color: $table-row-active-background-color;
   color: $table-row-active-color;
   user-select: none;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-color: $table-row-active-border-color transparent transparent;
+    border-style: solid;
+    border-width: 12px 12px 0 0;
+  }
 }
 
 :host(:not(.is-selected):hover) {
