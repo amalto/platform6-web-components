@@ -256,6 +256,10 @@ export namespace Components {
      */
     data: DataItem[];
     /**
+     * Default grid headers
+     */
+    defaultDefinitions?: ColumnDefinition<DataItem>[];
+    /**
      * Grid headers
      */
     definitions: ColumnDefinition<DataItem>[];
@@ -1373,6 +1377,10 @@ declare namespace LocalJSX {
      * Grid rows
      */
     data: DataItem[];
+    /**
+     * Default grid headers
+     */
+    defaultDefinitions?: ColumnDefinition<DataItem>[];
     /**
      * Grid headers
      */
