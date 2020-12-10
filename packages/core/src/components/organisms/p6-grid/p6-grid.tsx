@@ -54,6 +54,11 @@ export class P6Grid {
   @Prop() definitions!: ColumnDefinition<DataItem>[];
 
   /**
+   * Default grid headers
+   */
+  @Prop() defaultDefinitions?: ColumnDefinition<DataItem>[];
+
+  /**
    * Grid rows
    */
   @Prop() data!: DataItem[];
@@ -178,7 +183,7 @@ export class P6Grid {
   @Listen('p6ResetCustomDefinitions')
   onP6ResetCustomDefinitions(event: CustomEvent<ResetDefinitionsDetail>): void {
     if (event.detail.reset) {
-      this.columns = this.definitions.map(fromDefinition);
+      this.columns = this.defaultDefinitions === undefined ? this.definitions.map(fromDefinition) : this.defaultDefinitions.map(fromDefinition);
     }
 
     this.p6GridConfigurationChange.emit({ columns: this.columns });

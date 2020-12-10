@@ -8,6 +8,7 @@
 | -------------------------- | --------- | ---------------------------------------- | --------------------------------------------------------------- | ----------- |
 | `customContextMenu`        | --        | Display a context menu based on row data | `((row: Row<Record<string, unknown>>) => Element) \| undefined` | `undefined` |
 | `data` _(required)_        | --        | Grid rows                                | `Record<string, unknown>[]`                                     | `undefined` |
+| `defaultDefinitions`       | --        | Default grid headers                     | `ColumnDefinition<Record<string, unknown>>[] \| undefined`      | `undefined` |
 | `definitions` _(required)_ | --        | Grid headers                             | `ColumnDefinition<Record<string, unknown>>[]`                   | `undefined` |
 | `loading`                  | `loading` | Display spinner                          | `boolean`                                                       | `false`     |
 
