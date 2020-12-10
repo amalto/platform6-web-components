@@ -33,7 +33,7 @@ export const config: Config = {
       type: 'docs-readme',
     },
     {
-      type: 'docs-custom',
+      type: 'custom',
       generator: generateCustomElementsJson,
     },
   ],

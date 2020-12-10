@@ -1,5 +1,4 @@
-import { JsonDocs } from '@stencil/core/internal';
-import { promises as fs } from 'fs';
+import { Config } from '@stencil/core/internal';
 
 function formatType(type: string): string {
   return type;
@@ -7,12 +6,14 @@ function formatType(type: string): string {
 
 /**
  * @deprecated with https://github.com/ionic-team/stencil/pull/2354
- * @param docsData main components array which consists of components that stencil core found and meta information such as timestamp and compiler
+ * @param docs main components array which consists of components that stencil core found and meta information such as timestamp and compiler
  */
-export async function generateCustomElementsJson(docsData: JsonDocs): Promise<void> {
+export async function generateCustomElementsJson(config: Config, compilerCtx: any, buildCtx: any, docs: any): Promise<void> {
+  const { components, ...docsDataWithoutComponents } = docs;
   const jsonData = {
     version: 1.2,
-    tags: docsData.components.map(component => ({
+    ...docsDataWithoutComponents,
+    tags: components.map(component => ({
       name: component.tag,
       path: component.filePath,
       description: component.docs,
@@ -65,5 +66,10 @@ export async function generateCustomElementsJson(docsData: JsonDocs): Promise<vo
     })),
   };
 
-  await fs.writeFile('./dist/custom-elements.json', JSON.stringify(jsonData, null, 2));
+  return config.outputTargets
+    .filter(o => o.type === 'custom')
+    .map(() => {
+      return compilerCtx.fs.writeFile(`${config.rootDir}/dist/custom-elements.json`, JSON.stringify(jsonData, null, 2));
+    })
+    .shift();
 }
