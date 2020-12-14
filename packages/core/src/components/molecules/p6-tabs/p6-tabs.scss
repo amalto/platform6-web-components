@@ -8,7 +8,7 @@ $tabs-border-bottom-color: $border !default;
 $tabs-border-bottom-style: solid !default;
 $tabs-border-bottom-width: 1px !default;
 $tabs-link-color: $text !default;
-$tabs-link-hover-border-bottom-color: $text-strong !default;
+$tabs-link-hover-border-bottom-color: $border-hover !default;
 $tabs-link-hover-color: $text-strong !default;
 $tabs-link-active-border-top-color: $link !default;
 $tabs-link-active-color: $link !default;
@@ -52,7 +52,7 @@ $tabs-toggle-link-active-color: $link-invert !default;
 
     a {
       align-items: center;
-      border-bottom-color: $tabs-border-bottom-color;
+      border-bottom-color: transparent;
       border-bottom-style: $tabs-border-bottom-style;
       border-bottom-width: $tabs-border-bottom-width;
       color: $tabs-link-color;
