@@ -181,6 +181,12 @@ export namespace Components {
      */
     value: string;
   }
+  interface P6Close {
+    /**
+     * set the size of the action
+     */
+    size: Size;
+  }
   interface P6Container {}
   interface P6Dropdown {}
   interface P6Empty {}
@@ -908,6 +914,11 @@ declare global {
     prototype: HTMLP6CheckboxElement;
     new (): HTMLP6CheckboxElement;
   };
+  interface HTMLP6CloseElement extends Components.P6Close, HTMLStencilElement {}
+  var HTMLP6CloseElement: {
+    prototype: HTMLP6CloseElement;
+    new (): HTMLP6CloseElement;
+  };
   interface HTMLP6ContainerElement extends Components.P6Container, HTMLStencilElement {}
   var HTMLP6ContainerElement: {
     prototype: HTMLP6ContainerElement;
@@ -1113,6 +1124,7 @@ declare global {
     'p6-button': HTMLP6ButtonElement;
     'p6-calendar': HTMLP6CalendarElement;
     'p6-checkbox': HTMLP6CheckboxElement;
+    'p6-close': HTMLP6CloseElement;
     'p6-container': HTMLP6ContainerElement;
     'p6-dropdown': HTMLP6DropdownElement;
     'p6-empty': HTMLP6EmptyElement;
@@ -1295,6 +1307,12 @@ declare namespace LocalJSX {
      * Value
      */
     value?: string;
+  }
+  interface P6Close {
+    /**
+     * set the size of the action
+     */
+    size?: Size;
   }
   interface P6Container {}
   interface P6Dropdown {}
@@ -2122,6 +2140,7 @@ declare namespace LocalJSX {
     'p6-button': P6Button;
     'p6-calendar': P6Calendar;
     'p6-checkbox': P6Checkbox;
+    'p6-close': P6Close;
     'p6-container': P6Container;
     'p6-dropdown': P6Dropdown;
     'p6-empty': P6Empty;
@@ -2172,6 +2191,7 @@ declare module '@stencil/core' {
       'p6-button': LocalJSX.P6Button & JSXBase.HTMLAttributes<HTMLP6ButtonElement>;
       'p6-calendar': LocalJSX.P6Calendar & JSXBase.HTMLAttributes<HTMLP6CalendarElement>;
       'p6-checkbox': LocalJSX.P6Checkbox & JSXBase.HTMLAttributes<HTMLP6CheckboxElement>;
+      'p6-close': LocalJSX.P6Close & JSXBase.HTMLAttributes<HTMLP6CloseElement>;
       'p6-container': LocalJSX.P6Container & JSXBase.HTMLAttributes<HTMLP6ContainerElement>;
       'p6-dropdown': LocalJSX.P6Dropdown & JSXBase.HTMLAttributes<HTMLP6DropdownElement>;
       'p6-empty': LocalJSX.P6Empty & JSXBase.HTMLAttributes<HTMLP6EmptyElement>;
