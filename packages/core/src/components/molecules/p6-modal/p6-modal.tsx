@@ -1,4 +1,5 @@
 import { Component, Fragment, h, Prop } from '@stencil/core';
+import { Size } from '../../../shared/types';
 
 @Component({
   tag: 'p6-modal',
@@ -44,7 +45,7 @@ export class P6Modal {
           <slot />
         </div>
 
-        <button slot="close" class="modal-close is-large" type="button" aria-label="close" onClick={this.closeHandler()} />
+        <p6-close class="modal-close" size={Size.large} onClick={this.closeHandler()} />
       </Fragment>
     );
   }
@@ -56,7 +57,7 @@ export class P6Modal {
           <span class="modal-card-title">
             <slot name="head" />
           </span>
-          <button class="modal-card-close" type="button" aria-label="close" onClick={this.closeHandler()} />
+          <p6-close class="modal-card-close" onClick={this.closeHandler()} />
         </header>
 
         <section class="modal-card-body">

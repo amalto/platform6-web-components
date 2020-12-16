@@ -71,9 +71,6 @@ $modal-breakpoint: $tablet !default;
   }
 
   .modal-close {
-    @extend %delete;
-
-    background: none;
     height: $modal-close-dimensions;
     position: fixed;
 
@@ -81,10 +78,6 @@ $modal-breakpoint: $tablet !default;
 
     top: $modal-close-top;
     width: $modal-close-dimensions;
-  }
-
-  .modal-card-close {
-    @extend %delete;
   }
 
   .modal-card {

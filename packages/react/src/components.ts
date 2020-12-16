@@ -11,6 +11,7 @@ export const P6Action = /*@__PURE__*/createReactComponent<JSX.P6Action, HTMLP6Ac
 export const P6Button = /*@__PURE__*/createReactComponent<JSX.P6Button, HTMLP6ButtonElement>('p6-button');
 export const P6Calendar = /*@__PURE__*/createReactComponent<JSX.P6Calendar, HTMLP6CalendarElement>('p6-calendar');
 export const P6Checkbox = /*@__PURE__*/createReactComponent<JSX.P6Checkbox, HTMLP6CheckboxElement>('p6-checkbox');
+export const P6Close = /*@__PURE__*/createReactComponent<JSX.P6Close, HTMLP6CloseElement>('p6-close');
 export const P6Container = /*@__PURE__*/createReactComponent<JSX.P6Container, HTMLP6ContainerElement>('p6-container');
 export const P6Dropdown = /*@__PURE__*/createReactComponent<JSX.P6Dropdown, HTMLP6DropdownElement>('p6-dropdown');
 export const P6Empty = /*@__PURE__*/createReactComponent<JSX.P6Empty, HTMLP6EmptyElement>('p6-empty');

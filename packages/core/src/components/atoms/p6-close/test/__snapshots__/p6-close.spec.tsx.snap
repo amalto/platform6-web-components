@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`p6-close default output 1`] = `
+<p6-close aria-label="close" text="Tooltip">
+  <mock:shadow-root>
+    <button type="button"></button>
+  </mock:shadow-root>
+</p6-close>
+`;

@@ -8,7 +8,7 @@
 | ---------- | ---------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ | -------------- |
 | `disabled` | `disabled` | If `true`, the user cannot interact with the Action. | `boolean`                                                                                  | `false`        |
 | `mode`     | `mode`     | set the mode of the action                           | `Mode.danger \| Mode.default \| Mode.info \| Mode.primary \| Mode.success \| Mode.warning` | `Mode.default` |
-| `size`     | `size`     | set the size of the action                           | `Size.normal \| Size.small`                                                                | `Size.normal`  |
+| `size`     | `size`     | set the size of the action                           | `Size.large \| Size.normal \| Size.small`                                                  | `Size.normal`  |
 | `waiting`  | `waiting`  | If set, shows a waiting/busy indicator               | `boolean`                                                                                  | `false`        |
 
 ## Dependencies

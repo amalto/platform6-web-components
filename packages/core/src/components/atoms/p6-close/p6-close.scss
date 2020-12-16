@@ -1,0 +1,7 @@
+:host {
+  button {
+    @extend %delete;
+
+    background-color: transparent;
+  }
+}
