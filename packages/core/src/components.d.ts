@@ -748,17 +748,23 @@ export namespace Components {
      */
     active: boolean;
     /**
-     * Closes the tab if closeable
-     */
-    close: () => Promise<void>;
-    /**
      * Set the tab closeable
      */
     closeable: boolean;
     /**
-     * Set the tab hidden
+     * A tab-content id must be provided for each `p6-tab`. It's used internally to reference the selected tab and to switch between them.
      */
-    closed: boolean;
+    for: string;
+    /**
+     * Set the text to be display in a tooltip
+     */
+    tooltip?: string;
+  }
+  interface P6TabContent {
+    /**
+     * Set the tab content active
+     */
+    active: boolean;
   }
   interface P6Tabs {
     /**
@@ -1089,6 +1095,11 @@ declare global {
     prototype: HTMLP6TabElement;
     new (): HTMLP6TabElement;
   };
+  interface HTMLP6TabContentElement extends Components.P6TabContent, HTMLStencilElement {}
+  var HTMLP6TabContentElement: {
+    prototype: HTMLP6TabContentElement;
+    new (): HTMLP6TabContentElement;
+  };
   interface HTMLP6TabsElement extends Components.P6Tabs, HTMLStencilElement {}
   var HTMLP6TabsElement: {
     prototype: HTMLP6TabsElement;
@@ -1159,6 +1170,7 @@ declare global {
     'p6-spinner': HTMLP6SpinnerElement;
     'p6-switch': HTMLP6SwitchElement;
     'p6-tab': HTMLP6TabElement;
+    'p6-tab-content': HTMLP6TabContentElement;
     'p6-tabs': HTMLP6TabsElement;
     'p6-tag': HTMLP6TagElement;
     'p6-textarea': HTMLP6TextareaElement;
@@ -1985,19 +1997,37 @@ declare namespace LocalJSX {
      */
     closeable?: boolean;
     /**
-     * Set the tab hidden
+     * A tab-content id must be provided for each `p6-tab`. It's used internally to reference the selected tab and to switch between them.
      */
-    closed?: boolean;
+    for: string;
     /**
-     * Fires when the tab has been closed
+     * Emitted when the tab has been closed
      */
-    onP6Close?: (event: CustomEvent<boolean>) => void;
+    onP6Close?: (event: CustomEvent<{ id: string }>) => void;
+    /**
+     * Emitted when the tab is clicked
+     */
+    onP6Select?: (event: CustomEvent<{ id: string }>) => void;
+    /**
+     * Set the text to be display in a tooltip
+     */
+    tooltip?: string;
+  }
+  interface P6TabContent {
+    /**
+     * Set the tab content active
+     */
+    active?: boolean;
   }
   interface P6Tabs {
     /**
-     * Close tab event
+     * Emitted when a tab is closing
      */
-    onP6CloseTab?: (event: CustomEvent<{ tabId: string }>) => void;
+    onP6TabClose?: (event: CustomEvent<{ id: string; nextActiveId: string | undefined }>) => void;
+    /**
+     * Emitted when a tab is clicked
+     */
+    onP6TabSelect?: (event: CustomEvent<{ id: string }>) => void;
   }
   interface P6Tag {
     /**
@@ -2175,6 +2205,7 @@ declare namespace LocalJSX {
     'p6-spinner': P6Spinner;
     'p6-switch': P6Switch;
     'p6-tab': P6Tab;
+    'p6-tab-content': P6TabContent;
     'p6-tabs': P6Tabs;
     'p6-tag': P6Tag;
     'p6-textarea': P6Textarea;
@@ -2226,6 +2257,7 @@ declare module '@stencil/core' {
       'p6-spinner': LocalJSX.P6Spinner & JSXBase.HTMLAttributes<HTMLP6SpinnerElement>;
       'p6-switch': LocalJSX.P6Switch & JSXBase.HTMLAttributes<HTMLP6SwitchElement>;
       'p6-tab': LocalJSX.P6Tab & JSXBase.HTMLAttributes<HTMLP6TabElement>;
+      'p6-tab-content': LocalJSX.P6TabContent & JSXBase.HTMLAttributes<HTMLP6TabContentElement>;
       'p6-tabs': LocalJSX.P6Tabs & JSXBase.HTMLAttributes<HTMLP6TabsElement>;
       'p6-tag': LocalJSX.P6Tag & JSXBase.HTMLAttributes<HTMLP6TagElement>;
       'p6-textarea': LocalJSX.P6Textarea & JSXBase.HTMLAttributes<HTMLP6TextareaElement>;

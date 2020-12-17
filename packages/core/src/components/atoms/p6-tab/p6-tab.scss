@@ -1,3 +1,71 @@
+@import '@creativebulma/bulma-tooltip/src/sass/index';
+
+$tabs-background-color: $grey-lightest !default;
+$tabs-border-color: $border !default;
+$tabs-border-style: solid !default;
+$tabs-border-width: 1px !default;
+$tabs-max-width: 15rem;
+$tabs-padding: 0.5em 1em !default;
+
+$tabs-active-background-color: $scheme-main !default;
+$tabs-active-border-color: $border !default;
+$tabs-active-border-top-color: $primary !default;
+$tabs-active-border-bottom-color: $scheme-main !default;
+$tabs-hover-color: $text-strong !default;
+$tabs-hover-border-bottom-color: $border-hover !default;
+
 :host {
-  display: block;
+  align-items: center;
+  background-color: $tabs-background-color;
+  border-top: $tabs-border-width * 2 $tabs-border-style transparent;
+  border-left: $tabs-border-width $tabs-border-style transparent;
+  border-right: $tabs-border-width $tabs-border-style transparent;
+  border-bottom: $tabs-border-width $tabs-border-style $tabs-border-color;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: -#{$tabs-border-width};
+  padding: $tabs-padding;
+  vertical-align: top;
+  cursor: pointer;
+  text-decoration: none !important;
+  position: relative;
+
+  .slotWrapper {
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+    max-width: $tabs-max-width;
+  }
+
+  @include mobile {
+    border-top-width: $tabs-border-width;
+  }
+}
+
+:host(:hover) {
+  border-bottom-color: $tabs-hover-border-bottom-color;
+  color: $tabs-hover-color;
+}
+
+:host([closeable='']),
+:host([closeable='closeable']),
+:host([closeable='true']) {
+  padding-right: 0;
+}
+
+:host([active='']),
+:host([active='active']),
+:host([active='true']) {
+  border-top-color: $tabs-active-border-top-color;
+  border-left-color: $tabs-active-border-color;
+  border-right-color: $tabs-active-border-color;
+  border-bottom-color: $tabs-active-border-bottom-color;
+  background-color: $tabs-active-background-color;
+
+  @include mobile {
+    border-color: $tabs-active-border-top-color;
+    background-color: $tabs-active-border-top-color;
+    color: $tabs-active-background-color;
+  }
 }

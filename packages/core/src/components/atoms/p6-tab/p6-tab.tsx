@@ -1,6 +1,4 @@
-import { Component, ComponentInterface, Element, Event, EventEmitter, h, Host, Method, Prop } from '@stencil/core';
-
-let tabIds = 0;
+import { Component, ComponentInterface, Element, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
 
 @Component({
   tag: 'p6-tab',
@@ -21,38 +19,71 @@ export class P6Tab implements ComponentInterface {
   @Prop({ reflect: true }) closeable = false;
 
   /**
-   * Set the tab hidden
+   * A tab-content id must be provided for each `p6-tab`. It's used internally to reference
+   * the selected tab and to switch between them.
    */
-  @Prop({ mutable: true, reflect: true }) closed = false;
+  @Prop() for!: string;
 
   /**
-   * Fires when the tab has been closed
+   * Set the text to be display in a tooltip
    */
-  @Event({ eventName: 'p6Close' }) closeTab?: EventEmitter<boolean>;
+  @Prop() tooltip?: string;
 
-  componentWillLoad(): void {
-    if (this.host.id === '') {
-      // eslint-disable-next-line no-plusplus
-      this.host.id = `tab-${tabIds++}`;
-    }
-  }
+  /**
+   * Emitted when the tab has been closed
+   */
+  @Event() p6Close!: EventEmitter<{ id: string }>;
+
+  /**
+   * Emitted when the tab is clicked
+   */
+  @Event() p6Select!: EventEmitter<{ id: string }>;
 
   render(): JSX.Element {
-    return this.active && !this.closed ? (
-      <Host>
-        <slot />
+    /*
+    class={{
+      'has-tooltip-arrow': true,
+      [`has-tooltip-${Position[this.position]}`]: !isDefaultPosition(this.position, Position.top),
+      [`has-tooltip-${Mode[this.mode]}`]: !isDefaultMode(this.mode),
+    }}
+    innerHTML={img.html[0]}
+    data-tooltip={this.text}
+*/
+    return (
+      <Host slot="tab" role="tab" onClick={this.onClickHandler} onKeyup={this.onKeyUpHandler}>
+        <div class={{ 'has-tooltip-arrow': this.tooltip !== undefined }} data-tooltip={this.tooltip || null}>
+          <div class="slotWrapper">
+            <slot />
+          </div>
+        </div>
+
+        {this.closeable ? <p6-close onClick={this.onCloseHandler} /> : null}
       </Host>
-    ) : null;
+    );
   }
 
-  /**
-   * Closes the tab if closeable
-   */
-  @Method()
-  async close(): Promise<void> {
-    if (this.closeable && this.closeTab !== undefined) {
-      this.closed = true;
-      this.closeTab.emit(this.closed);
+  private onKeyUpHandler = (event: KeyboardEvent): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.triggerSelectTab(event);
     }
+  };
+
+  private onClickHandler = (event: Event): void => {
+    this.triggerSelectTab(event);
+  };
+
+  private onCloseHandler = (event: Event): void => {
+    this.triggerCloseTab(event);
+  };
+
+  private triggerSelectTab(event: Event | KeyboardEvent) {
+    this.p6Select.emit({ id: this.for });
+    event.preventDefault();
+  }
+
+  private triggerCloseTab(event: Event | KeyboardEvent) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    this.p6Close.emit({ id: this.for });
   }
 }

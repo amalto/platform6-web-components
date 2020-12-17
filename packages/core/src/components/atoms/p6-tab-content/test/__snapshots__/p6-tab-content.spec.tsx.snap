@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`p6-tab-content renders 1`] = `
+<p6-tab-content aria-hidden="true" class="hidden">
+  <mock:shadow-root>
+    <slot></slot>
+  </mock:shadow-root>
+</p6-tab-content>
+`;

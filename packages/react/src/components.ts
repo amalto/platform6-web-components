@@ -46,6 +46,7 @@ export const P6ServicePanel = /*@__PURE__*/createReactComponent<JSX.P6ServicePan
 export const P6Spinner = /*@__PURE__*/createReactComponent<JSX.P6Spinner, HTMLP6SpinnerElement>('p6-spinner');
 export const P6Switch = /*@__PURE__*/createReactComponent<JSX.P6Switch, HTMLP6SwitchElement>('p6-switch');
 export const P6Tab = /*@__PURE__*/createReactComponent<JSX.P6Tab, HTMLP6TabElement>('p6-tab');
+export const P6TabContent = /*@__PURE__*/createReactComponent<JSX.P6TabContent, HTMLP6TabContentElement>('p6-tab-content');
 export const P6Tabs = /*@__PURE__*/createReactComponent<JSX.P6Tabs, HTMLP6TabsElement>('p6-tabs');
 export const P6Tag = /*@__PURE__*/createReactComponent<JSX.P6Tag, HTMLP6TagElement>('p6-tag');
 export const P6Textarea = /*@__PURE__*/createReactComponent<JSX.P6Textarea, HTMLP6TextareaElement>('p6-textarea');

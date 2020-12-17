@@ -1,6 +1,6 @@
-import { Component, ComponentInterface, Element, Event, EventEmitter, forceUpdate, h, Host, JSX, Method, State } from '@stencil/core';
+import { Component, ComponentInterface, Element, Event, EventEmitter, h, Host, JSX, Listen, Method, State } from '@stencil/core';
 import { toArray } from '../../../utils/dom';
-import { isTabValid } from './utils';
+import { isTab, isTabContent } from './utils';
 
 @Component({
   tag: 'p6-tabs',
@@ -11,18 +11,36 @@ export class P6Tabs implements ComponentInterface {
   @Element() host!: HTMLP6TabsElement;
 
   /**
-   * Close tab event
+   * Emitted when a tab is closing
    */
-  @Event({ eventName: 'p6CloseTab' }) closeTabEmitter?: EventEmitter<{ tabId: string }>;
+  @Event() p6TabClose!: EventEmitter<{ id: string; nextActiveId: string | undefined }>;
 
-  @State() selectedTabId: string | undefined;
+  /**
+   * Emitted when a tab is clicked
+   */
+  @Event() p6TabSelect!: EventEmitter<{ id: string }>;
+
+  @State() activeTab: string | undefined;
+
+  @Listen('p6Select')
+  onSelectTab(event: CustomEvent<{ id: string }>): void {
+    event.preventDefault();
+    this.activeTab = event.detail.id;
+    this.p6TabSelect.emit({ id: this.activeTab });
+  }
+
+  @Listen('p6Close')
+  onCloseTab(event: CustomEvent<{ id: string }>): void {
+    this.closeTab(event.detail.id);
+    event.preventDefault();
+  }
 
   /**
    * refresh the component
    */
   @Method()
   async refresh(): Promise<void> {
-    forceUpdate(this.host);
+    this.activeTab = this.getSelectedTabId();
   }
 
   /**
@@ -31,39 +49,25 @@ export class P6Tabs implements ComponentInterface {
    */
   @Method()
   async close(tabId: string): Promise<boolean> {
-    const tabToClose = this.host.querySelector<HTMLP6TabElement>(`#${tabId}`);
-
-    if (tabToClose !== null) {
-      this.closeTab(tabToClose);
-      return Promise.resolve(true);
-    }
-    return Promise.resolve(false);
-  }
-
-  private getTabs(): HTMLP6TabElement[] {
-    return toArray(this.host.children).filter(isTabValid);
+    return this.closeTab(tabId);
   }
 
   componentWillLoad(): void {
-    const tabs = this.getTabs();
-    const selectedTab = tabs.find(tab => tab.active);
-
-    if (tabs.length === 0) {
-      return;
-    }
-
-    if (selectedTab === undefined) {
-      tabs[0].active = true;
-      this.selectedTabId = tabs[0].id;
-    } else {
-      this.selectedTabId = selectedTab.id;
-    }
+    this.activeTab = this.getSelectedTabId();
   }
 
   componentWillRender(): void {
-    this.getTabs().forEach(tab => {
-      if (tab.closed) {
-        this.host.removeChild(tab);
+    if (this.activeTab === undefined) {
+      return;
+    }
+
+    toArray(this.host.children).forEach(child => {
+      if (isTab(child)) {
+        // eslint-disable-next-line no-param-reassign
+        child.active = child.for === this.activeTab;
+      } else if (isTabContent(child)) {
+        // eslint-disable-next-line no-param-reassign
+        child.active = child.id === this.activeTab;
       }
     });
   }
@@ -78,60 +82,52 @@ export class P6Tabs implements ComponentInterface {
     return (
       <Host>
         <div class="tabs">
-          <ul>{tabs.map(tab => this.renderTab(tab))}</ul>
+          <slot name="tab" />
         </div>
-        <div class="tab-content">
+        <div class="tab-contents">
           <slot />
         </div>
       </Host>
     );
   }
 
-  private renderTab(tab: HTMLP6TabElement): JSX.Element {
-    return (
-      <li class="has-tooltip-arrow has-tooltip-bottom" data-tooltip={tab.title}>
-        <a class={tab.active ? 'is-active' : undefined} href={`#${tab.id}`} onClick={this.selectTabHandler(tab)}>
-          <span class="title">{tab.title}</span>
-          <span aria-hidden="true" class={{ 'delete': true, 'disabled-close': !tab.closeable }} onClick={this.closeTabHandler(tab)} />
-        </a>
-      </li>
-    );
+  private getTabs(): HTMLP6TabElement[] {
+    return toArray(this.host.children).filter(isTab);
   }
 
-  private selectTabHandler(selectedTab: HTMLP6TabElement): (event: MouseEvent) => void {
-    return (event: MouseEvent): void => {
-      event.preventDefault();
-
-      this.getTabs().forEach(tab => {
-        // eslint-disable-next-line no-param-reassign
-        tab.active = tab.id === selectedTab.id;
-      });
-      this.selectedTabId = selectedTab.id;
-    };
-  }
-
-  private closeTabHandler(closedTab: HTMLP6TabElement): (event: MouseEvent) => void {
-    return (event: MouseEvent): void => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      this.closeTab(closedTab);
-    };
-  }
-
-  private closeTab(tabToclose: HTMLP6TabElement): void {
-    tabToclose.close();
-
+  private getSelectedTabId(): string | undefined {
     const tabs = this.getTabs();
-    const closedTabIndex = tabs.findIndex(tab => tab.id === tabToclose.id);
 
-    if (tabToclose.active && tabs[closedTabIndex - 1] !== undefined) {
-      tabs[closedTabIndex - 1].active = true;
-      this.selectedTabId = tabs[closedTabIndex - 1].id;
-    } else {
-      forceUpdate(this.host);
+    if (tabs.length === 0) {
+      return undefined;
     }
 
-    this.closeTabEmitter?.emit({ tabId: tabToclose.id });
+    const selectedTab = this.getTabs().find(tab => tab.active === true);
+
+    return selectedTab?.for ?? tabs[0].for;
+  }
+
+  private getNextId(currentId: string): string | undefined {
+    const tabs = this.getTabs();
+
+    const tabToCloseIndex = tabs.findIndex(tab => tab.for === currentId);
+
+    return tabs[tabToCloseIndex - 1]?.for ?? tabs[0]?.for;
+  }
+
+  private closeTab(id: string): Promise<boolean> {
+    const tabs = this.getTabs();
+    const tabToClose = tabs.find(tab => tab.for === id);
+
+    if (tabToClose === undefined) {
+      return Promise.resolve(true);
+    }
+
+    const activeTabUnknown = tabs.find(tab => tab.for === this.activeTab) === undefined;
+    const nextSelectedId: string | undefined = tabToClose.for === this.activeTab || activeTabUnknown ? this.getNextId(tabToClose.for) : this.activeTab;
+
+    this.p6TabClose?.emit({ id: tabToClose.for, nextActiveId: nextSelectedId });
+
+    return Promise.resolve(true);
   }
 }
