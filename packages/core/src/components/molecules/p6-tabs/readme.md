@@ -4,9 +4,10 @@
 
 ## Events
 
-| Event        | Description     | Type                              |
-| ------------ | --------------- | --------------------------------- |
-| `p6CloseTab` | Close tab event | `CustomEvent<{ tabId: string; }>` |
+| Event         | Description                   | Type                                                              |
+| ------------- | ----------------------------- | ----------------------------------------------------------------- |
+| `p6TabClose`  | Emitted when a tab is closing | `CustomEvent<{ id: string; nextActiveId: string \| undefined; }>` |
+| `p6TabSelect` | Emitted when a tab is clicked | `CustomEvent<{ id: string; }>`                                    |
 
 ## Methods
 

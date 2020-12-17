@@ -13,12 +13,14 @@
 ### Used by
 
 - [p6-modal](../../molecules/p6-modal)
+- [p6-tab](../p6-tab)
 
 ### Graph
 
 ```mermaid
 graph TD;
   p6-modal --> p6-close
+  p6-tab --> p6-close
   style p6-close fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
