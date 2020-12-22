@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.2](https://github.com/amalto/platform6-web-components/compare/@platform6/components@1.1.0-alpha.1...@platform6/components@1.1.0-alpha.2) (2020-12-22)
+
+
+### Bug Fixes
+
+* **p6-field:** add a mark when input is mandatory ([13aaca4](https://github.com/amalto/platform6-web-components/commit/13aaca4a5bc8ed3cb3dd4db5af8ea68b5076eb84)), closes [#7](https://github.com/amalto/platform6-web-components/issues/7)
+
+
+### Features
+
+* **p6-modal:** emit an event when the user try to close the modal ([13c142e](https://github.com/amalto/platform6-web-components/commit/13c142e83c3dbcc77db265795cb73b3565f95546))
+
+
+
+
+
 # [1.1.0-alpha.1](https://github.com/amalto/platform6-web-components/compare/@platform6/components@1.1.0-alpha.0...@platform6/components@1.1.0-alpha.1) (2020-12-21)
 
 
