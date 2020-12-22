@@ -4,7 +4,9 @@ exports[`p6-field renders 1`] = `
 <p6-field>
   <mock:shadow-root>
     <label class="label">
-      <slot name="label"></slot>
+      <div>
+        <slot name="label"></slot>
+      </div>
       <slot></slot>
     </label>
     <slot name="hint"></slot>

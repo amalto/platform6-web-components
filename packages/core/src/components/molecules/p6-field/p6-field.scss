@@ -107,6 +107,16 @@ $help-size: $size-small !default;
     }
   }
 
+  .required {
+    position: relative;
+
+    &::after {
+      content: '*';
+      color: $danger;
+      font-weight: $weight-bold;
+    }
+  }
+
   ::slotted([slot='hint']) {
     .help {
       display: block;

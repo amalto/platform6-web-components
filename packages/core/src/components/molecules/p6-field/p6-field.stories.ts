@@ -26,10 +26,12 @@ const getFieldContent = (label: string, hint: string, prop?: Props<Components.P6
 export const Default = makeStory<{
   label: string;
   hint: string;
+  required: boolean;
 }>({
   args: {
     label: 'Label',
     hint: 'hint message',
+    required: false,
   },
   builder: ({ label, hint, ...args }): HTMLElement => getStoryField(getFieldContent(label, hint, { ...args })),
 });
