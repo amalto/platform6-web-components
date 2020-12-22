@@ -5,6 +5,11 @@ import { Mode } from '../../../shared/types';
 import { isEmpty } from '../../../utils/attribute';
 import { getControl } from './utils';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isRequired(value: any): boolean {
+  return value !== undefined && (value === true || value === 'true' || value === '' || value === 'required');
+}
+
 @Component({
   tag: 'p6-field',
   styleUrl: 'p6-field.scss',
@@ -57,7 +62,9 @@ export class P6Field implements ComponentInterface {
           }}
           htmlFor={this.input?.name}
         >
-          <slot name="label" />
+          <div class={{ required: isRequired(this.input?.required) }}>
+            <slot name="label" />
+          </div>
           <slot />
         </label>
         {this.isReadOnly || this.isDisabled ? null : <slot name="hint" />}
