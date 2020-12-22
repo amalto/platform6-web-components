@@ -1789,6 +1789,10 @@ declare namespace LocalJSX {
      */
     hasCard?: boolean;
     /**
+     * Emitted when the user try to close the modal
+     */
+    onP6Close?: (event: CustomEvent<void>) => void;
+    /**
      * Open the modal
      */
     open?: boolean;

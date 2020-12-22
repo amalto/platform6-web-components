@@ -1,4 +1,4 @@
-import { Component, Fragment, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, Fragment, h, Prop } from '@stencil/core';
 import { Size } from '../../../shared/types';
 
 @Component({
@@ -15,7 +15,12 @@ export class P6Modal {
   /**
    * Open the modal
    */
-  @Prop({ mutable: true, reflect: true }) open = false;
+  @Prop({ reflect: true }) open = false;
+
+  /**
+   * Emitted when the user try to close the modal
+   */
+  @Event() p6Close!: EventEmitter<void>;
 
   render(): JSX.Element {
     const classList = {
@@ -34,7 +39,7 @@ export class P6Modal {
 
   private closeHandler(): (event: Event) => void {
     return () => {
-      this.open = false;
+      this.p6Close.emit();
     };
   }
 

@@ -9,6 +9,12 @@
 | `hasCard` | `has-card` | Display a modal with a head, a body and a foot | `boolean` | `false` |
 | `open`    | `open`     | Open the modal                                 | `boolean` | `false` |
 
+## Events
+
+| Event     | Description                                  | Type                |
+| --------- | -------------------------------------------- | ------------------- |
+| `p6Close` | Emitted when the user try to close the modal | `CustomEvent<void>` |
+
 ## Dependencies
 
 ### Depends on
