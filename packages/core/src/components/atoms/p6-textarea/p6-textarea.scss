@@ -5,6 +5,11 @@
   display: block;
   position: relative;
 
+  form {
+    height: inherit;
+    width: 100%;
+  }
+
   .control {
     @include control-container;
 
