@@ -1,30 +1,42 @@
-// for field has-addons
-@import '../../../../../styles/atoms/field';
-// for columns
-@import '../../../../../styles/atoms/columns';
 //Tooltip
 @import '@creativebulma/bulma-tooltip/src/sass/index';
 
 :host {
-  display: block;
+  display: flex;
 
-  .field {
-    @include field;
+  .lang {
+    flex: 1 1 0;
+    margin-right: $column-gap * 0.7;
 
-    p6-action {
-      margin-right: $margin-gap;
+    div {
+      display: flex;
+      flex-direction: row;
+      flex: inherit;
+      flex-wrap: nowrap;
+    }
+
+    p6-language {
+      flex-grow: inherit;
     }
   }
 
-  .column {
-    @include column;
+  .translation {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: row;
+
+    &::after {
+      content: '*';
+      color: $danger;
+      font-weight: $weight-bold;
+    }
   }
 
-  .columns {
-    @include columns;
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
 
-    &.is-variable.is-1 {
-      --columnGap: 0.75rem;
+    .lang {
+      margin-right: 0;
     }
   }
 }

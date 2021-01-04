@@ -67,47 +67,38 @@ export class P6TranslationLine implements ComponentInterface {
   render(): JSX.Element {
     const isDefault = isDefaultLanguage(this.language);
 
-    const fieldClass = {
-      'field': true,
-      'has-addons': !(isDefault || this.readOnly || this.disabled),
-    };
-
     return (
       <Host onP6Valid={this.cancelEvent} onP6Invalid={this.cancelEvent} onP6Change={this.languageChangeHandler}>
-        <div class="columns is-variable is-1">
-          <div class="column">
-            <div class={fieldClass}>
-              {isDefault || this.readOnly || this.disabled ? null : (
-                <p6-action
-                  onClick={this.deleteHandler}
-                  mode={Mode.danger}
-                  size={Size.normal}
-                  class={{
-                    'has-tooltip-arrow': true,
-                    [`has-tooltip-right`]: true,
-                  }}
-                  data-tooltip={this.l10n?.deleteTooltip}
-                >
-                  <p6-icon name="trash-alt" size={Size.normal} />
-                </p6-action>
-              )}
-              <div class="control is-expanded">
-                <p6-language name={`${this.name}-${this.language}-lang`} value={this.language} disabled={this.disabled || isDefault} excludes={this.excludes} required />
-              </div>
-            </div>
+        <div class="lang">
+          <div>
+            {isDefault || this.readOnly || this.disabled ? null : (
+              <p6-action
+                onClick={this.deleteHandler}
+                mode={Mode.danger}
+                size={Size.normal}
+                class={{
+                  'has-tooltip-arrow': true,
+                  [`has-tooltip-right`]: true,
+                }}
+                data-tooltip={this.l10n?.deleteTooltip}
+              >
+                <p6-icon name="trash-alt" size={Size.normal} />
+              </p6-action>
+            )}
+            <p6-language name={`${this.name}-${this.language}-lang`} value={this.language} disabled={this.disabled || isDefault} excludes={this.excludes} required />
           </div>
-          <p6-textarea
-            class="column"
-            name={`${this.name}-${this.language}-value`}
-            value={this.translation}
-            rows={2}
-            readOnly={this.readOnly}
-            disabled={this.disabled}
-            required
-            onP6Valid={this.translationChangeHandler}
-            onP6Invalid={this.translationChangeHandler}
-          />
         </div>
+        <p6-textarea
+          class="translation"
+          name={`${this.name}-${this.language}-value`}
+          value={this.translation}
+          rows={2}
+          readOnly={this.readOnly}
+          disabled={this.disabled}
+          required
+          onP6Valid={this.translationChangeHandler}
+          onP6Invalid={this.translationChangeHandler}
+        />
       </Host>
     );
   }

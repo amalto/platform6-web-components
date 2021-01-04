@@ -9,4 +9,8 @@
       margin-left: $margin-gap;
     }
   }
+
+  p6-translation-line:not(:last-child) {
+    margin-bottom: $column-gap;
+  }
 }
