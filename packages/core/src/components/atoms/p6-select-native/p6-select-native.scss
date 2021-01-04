@@ -2,10 +2,11 @@
 
 :host {
   display: inline-block;
+  width: 100%;
 
   .select {
     display: inline-block;
-    max-width: 100%;
+    width: 100%;
     position: relative;
     vertical-align: top;
 
@@ -42,7 +43,7 @@
       cursor: pointer;
       display: block;
       font-size: 1em;
-      max-width: 100%;
+      width: 100%;
       outline: none;
 
       &::-ms-expand {

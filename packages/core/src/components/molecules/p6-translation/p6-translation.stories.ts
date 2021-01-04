@@ -53,11 +53,19 @@ export const Form = makeStory<{
     readOnly: false,
   },
   builder: (props): HTMLElement =>
-    getForm(
+    getForm([
+      getElement('p6-field', [
+        getElement('p6-label', 'label input', {
+          slot: 'label',
+        }),
+        getElement('p6-input', '', {
+          name: 'test',
+        }),
+      ]),
       getStoryField('Label', {
         name: 'field',
         value: { en: 'English', fr: 'Français' },
         ...props,
       }),
-    ),
+    ]),
 });
