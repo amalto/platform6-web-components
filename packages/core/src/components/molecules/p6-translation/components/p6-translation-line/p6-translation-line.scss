@@ -22,5 +22,9 @@
 
   .columns {
     @include columns;
+
+    &.is-variable.is-1 {
+      --columnGap: 0.75rem;
+    }
   }
 }

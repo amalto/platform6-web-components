@@ -67,11 +67,16 @@ export class P6TranslationLine implements ComponentInterface {
   render(): JSX.Element {
     const isDefault = isDefaultLanguage(this.language);
 
+    const fieldClass = {
+      'field': true,
+      'has-addons': !(isDefault || this.readOnly || this.disabled),
+    };
+
     return (
       <Host onP6Valid={this.cancelEvent} onP6Invalid={this.cancelEvent} onP6Change={this.languageChangeHandler}>
         <div class="columns is-variable is-1">
           <div class="column">
-            <div class="field has-addons">
+            <div class={fieldClass}>
               {isDefault || this.readOnly || this.disabled ? null : (
                 <p6-action
                   onClick={this.deleteHandler}
@@ -91,18 +96,17 @@ export class P6TranslationLine implements ComponentInterface {
               </div>
             </div>
           </div>
-          <div class="column">
-            <p6-textarea
-              name={`${this.name}-${this.language}-value`}
-              value={this.translation}
-              rows={2}
-              readOnly={this.readOnly}
-              disabled={this.disabled}
-              required
-              onP6Valid={this.translationChangeHandler}
-              onP6Invalid={this.translationChangeHandler}
-            />
-          </div>
+          <p6-textarea
+            class="column"
+            name={`${this.name}-${this.language}-value`}
+            value={this.translation}
+            rows={2}
+            readOnly={this.readOnly}
+            disabled={this.disabled}
+            required
+            onP6Valid={this.translationChangeHandler}
+            onP6Invalid={this.translationChangeHandler}
+          />
         </div>
       </Host>
     );
