@@ -77,6 +77,7 @@ export class P6TranslationLine implements ComponentInterface {
                 mode={Mode.danger}
                 size={Size.normal}
                 class={{
+                  'delete': true,
                   'has-tooltip-arrow': true,
                   [`has-tooltip-right`]: true,
                 }}
