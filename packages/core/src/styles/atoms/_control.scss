@@ -143,6 +143,9 @@ $control-padding-horizontal: calc(0.75em - #{$control-border-width}) !default;
   border-color: $input-border-color;
   border-radius: $input-radius;
   color: $input-color;
+  font: inherit;
+  letter-spacing: inherit;
+
   @include placeholder {
     color: $input-placeholder-color;
   }
