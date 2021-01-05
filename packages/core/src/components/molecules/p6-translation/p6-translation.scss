@@ -10,6 +10,10 @@
     }
   }
 
+  p6-translation-line {
+    font-weight: $weight-normal;
+  }
+  
   p6-translation-line:not(:last-child) {
     margin-bottom: $column-gap;
   }
