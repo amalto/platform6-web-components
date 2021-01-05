@@ -15,6 +15,9 @@
       flex-wrap: nowrap;
     }
 
+    .delete {
+      margin-right: $column-gap * 0.4;
+    }
     p6-language {
       flex-grow: inherit;
     }
@@ -24,11 +27,14 @@
     flex: 1 1 0;
     display: flex;
     flex-direction: row;
+    position: relative;
 
     &::after {
       content: '*';
       color: $danger;
       font-weight: $weight-bold;
+      position: absolute;
+      right: -$column-gap * 0.8;
     }
   }
 
@@ -37,6 +43,7 @@
 
     .lang {
       margin-right: 0;
+      margin-bottom: $column-gap * 0.4;
     }
   }
 }
