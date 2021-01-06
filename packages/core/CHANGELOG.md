@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.3](https://github.com/amalto/platform6-web-components/compare/@platform6/components@1.1.0-alpha.2...@platform6/components@1.1.0-alpha.3) (2021-01-06)
+
+
+### Bug Fixes
+
+* **p6-translation:** fixes the alignment of the component with the other fields of the form ([91da95b](https://github.com/amalto/platform6-web-components/commit/91da95bcb357894203a2e1267a455d316a470888)), closes [#21](https://github.com/amalto/platform6-web-components/issues/21)
+
+
+
+
+
 # [1.1.0-alpha.2](https://github.com/amalto/platform6-web-components/compare/@platform6/components@1.1.0-alpha.1...@platform6/components@1.1.0-alpha.2) (2020-12-22)
 
 
